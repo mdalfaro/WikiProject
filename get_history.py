@@ -2,9 +2,15 @@ import datetime
 import pandas as pd
 import sqlite3
 import os
+import getpass
 
-# Get user's path to Chrome History folder
-path = input('Path to Chrome History folder.\ne.g., /Users/maxalfaro/Library/Application Support/Google/Chrome/Default/History\nPath: ')
+try:
+	path = '/Users/' + getpass.getuser() + '/Library/Application Support/Google/Chrome/Default/History'
+	if not os.path.isfile(path):
+		raise Exception('invalid path')
+except:
+	# Get user's path to Chrome History folder
+	path = input('Provide path to Chrome History folder.\ne.g., /Users/maxalfaro/Library/Application Support/Google/Chrome/Default/History\nPath: ')
 
 # Create a connection that represents the database
 conn = sqlite3.connect(path)
