@@ -1,6 +1,6 @@
 suppressMessages(library(lubridate))
 
-install.packages(forecast)
+install.packages('forecast')
 library(forecast)
 
 views <- read.csv('views_per_day.csv')
