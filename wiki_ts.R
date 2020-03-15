@@ -1,7 +1,7 @@
 suppressMessages(library(lubridate))
 
 tryCatch({
-  suppressMessages(library(forecast))
+  suppressWarnings(library(forecast))
 }, error = function(e) {
   install.packages('forecast',repos = 'http://cran.us.r-project.org')
 })
