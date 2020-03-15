@@ -1,6 +1,4 @@
 import download_history
-import start_server
-import _thread
 
 def main():
 	download_history.downloadHistory()
