@@ -14,4 +14,4 @@ def cleanForecasts(path='forecast.csv'):
 	forecasts.drop(columns=['80_lo', '80_hi'], axis=1, inplace=True)
 
 	# Write out
-	forecasts.to_csv('forecasts.csv')
+	forecasts.to_csv('forecast.csv')
