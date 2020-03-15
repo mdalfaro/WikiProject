@@ -1,7 +1,11 @@
 suppressMessages(library(lubridate))
 
-install.packages('forecast',repos = 'http://cran.us.r-project.org')
-library(forecast)
+tryCatch({
+  library(forecast)
+}, error = function(e) {
+  install.packages('forecast',repos = 'http://cran.us.r-project.org')
+})
+
 
 views <- read.csv('wiki_history.csv')
 
