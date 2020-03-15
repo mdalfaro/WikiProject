@@ -3,7 +3,7 @@ suppressMessages(library(lubridate))
 install.packages('forecast',repos = 'http://cran.us.r-project.org')
 library(forecast)
 
-views <- read.csv('views_per_day.csv')
+views <- read.csv('wiki_history.csv')
 
 start_day <- decimal_date(as.Date(views['date'][[1]][1]))
 
