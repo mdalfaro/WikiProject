@@ -46,7 +46,7 @@ def clean(wiki_history):
 	wiki_history['title'] = wiki_history['title'].apply(lambda x : x.replace(' - Wikipedia', ''))
 
 	# Wiki views per day
-	views_per_day = wiki_history['date'].apply(lambda date : date.split(' ')[0]).value_counts()
+	views_per_day = wiki_history['date'].apply(lambda date : str(date).split(' ')[0]).value_counts()
 	views_per_day = pd.DataFrame({'date':list(views_per_day.index), 'count':list(views_per_day)})
 	views_per_day['date'] = views_per_day['date'].apply(lambda x : datetime.datetime(int(x.split('-')[0]), int(x.split('-')[1]), int(x.split('-')[2])))
 
