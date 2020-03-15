@@ -45,13 +45,21 @@ def clean(wiki_history):
 	# Remove the '- Wikipedia' part from the titles
 	wiki_history['title'] = wiki_history['title'].apply(lambda x : x.replace(' - Wikipedia', ''))
 
-	# Sort by date 
-	wiki_history.sort_values('date', inplace=True)
+	# Wiki views per day
+	views_per_day = wiki_history['date'].apply(lambda date : date.split(' ')[0]).value_counts()
+	views_per_day = pd.DataFrame({'date':list(views_per_day.index), 'count':list(views_per_day)})
+	views_per_day['date'] = views_per_day['date'].apply(lambda x : datetime.datetime(int(x.split('-')[0]), int(x.split('-')[1]), int(x.split('-')[2])))
 
-	# Add running sum of total visits
-	wiki_history['totalVisits'] = list(range(1, len(wiki_history)+1))
+	# Fill in misssing dates with (date, 0) entries
+	time_range = pd.DataFrame({'date':list(pd.date_range(min(views_per_day['date']), max(views_per_day['date'])))})
+	views_per_day = pd.DataFrame.merge(views_per_day, time_range, on='date', how='right')
+	views_per_day.fillna(0, inplace=True)
+	views_per_day.sort_values('date', inplace=True)
 
-	return(wiki_history)
+	# Add running sum column
+	views_per_day['total'] = list(np.cumsum(views_per_day['count']))
+
+	return(views_per_day)
 
 def writeOut(df, path='wiki_history.csv'):
 	# Write to csv
