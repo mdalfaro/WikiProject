@@ -17,8 +17,8 @@ views_ts <- ts(views['total'], start=start_day, freq=365)
 # Use auto.arima to choose ARIMA terms
 fit <- auto.arima(views_ts, seasonal=FALSE)
 
-# Forecast for next 15 days
-fore <- forecast(fit, h = 15)
+# Forecast for next 30 days
+fore <- forecast(fit, h = 30)
 
 # Write to csv 
 write.csv(fore, 'forecast.csv')
